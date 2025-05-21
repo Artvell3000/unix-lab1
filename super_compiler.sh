@@ -4,7 +4,7 @@
 # Получение имени выходного файла
 get_output_file_name(){
     if test -f $1; then
-        output_word=$(grep -oE '&Output:[[:space:]]*[^[:space:]]+' $1)
+        local output_word=$(grep -oE '&Output:[[:space:]]*[^[:space:]]+' $1)
         output_word=$(echo "$output_word" | sed 's/^&Output:[[:space:]]*//')
         output_word=$(echo "$output_word" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
         echo "$output_word"
@@ -15,8 +15,8 @@ get_output_file_name(){
 }
 
 init_compiler(){
-    file=$1
-    file_extension="${file##*.}"
+    local file=$1
+    local file_extension="${file##*.}"
 
     if [[ "$file" == "$file_extension" ]]; then
         echo "Файл $file не имеет расширения" >&2
@@ -38,8 +38,9 @@ init_compiler(){
     esac
 }
 
-original_dir=$(pwd)
+
 compiled_file=$1
+original_dir=$(pwd)
 output_file_name=$(get_output_file_name $1)
 
 TEMP_DIR=$(mktemp -d)

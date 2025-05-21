@@ -10,8 +10,8 @@ check_compiler(){
 }
 
 build(){
-    compiled_file_name=$1
-    output_file_name=$2
+    local compiled_file_name=$1
+    local output_file_name=$2
     g++ $compiled_file_name -o $output_file_name
 
     if [ -f $output_file_name ]; then
