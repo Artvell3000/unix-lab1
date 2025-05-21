@@ -1,0 +1,35 @@
+% Минимальный TeX-документ с комментариями
+% &Output: doc.pdf
+\documentclass{article} % Используем класс article (базовый)
+\usepackage[utf8]{inputenc} % Кодировка UTF-8
+\usepackage[T2A]{fontenc}   % Поддержка кириллицы
+\usepackage[russian]{babel} % Русская локализация
+
+\begin{document}
+
+% Титульный заголовок
+\title{Пример простого \LaTeX-документа}
+\author{Ваше Имя}
+\date{\today} % Автоматическая дата
+\maketitle    % Генерируем заголовок
+
+\section{Первый раздел} % Создаём раздел
+
+Это простой абзац текста. В \LaTeX{} абзацы разделяются пустой строкой.
+
+% Формула в тексте ($...$) 
+Формула Эйнштейна: $E = mc^2$.
+
+% Нумерованное уравнение (environment equation)
+\begin{equation}
+a^2 + b^2 = c^2
+\end{equation}
+
+% Маркированный список
+\begin{itemize}
+    \item Первый пункт
+    \item Второй пункт
+    \item Третий пункт
+\end{itemize}
+
+\end{document}

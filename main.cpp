@@ -1,4 +1,4 @@
-// &Output: compiled_main
+// &Output: main_app
 #include <iostream>
 
 int main() {
