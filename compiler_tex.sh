@@ -4,7 +4,7 @@ check_compiler(){
         pdflatex --version | head -n 1
         return 0
     else
-        echo "pdflatex не найден." >&2
+        echo "pdflatex не найденв системных директориях, указанных в PATH" >&2
         return 1
     fi
 }
