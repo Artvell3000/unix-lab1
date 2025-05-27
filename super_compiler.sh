@@ -41,6 +41,10 @@ init_compiler(){
 compiled_file=$1
 original_dir=$(pwd)
 output_file_name=$(get_output_file_name $1)
+if [ $? -ne 0 ]; then
+    echo "Ошибка: Не найдено имя выходного файла" >&2
+    exit 1
+fi
 
 cleanup_temp_dir(){
     if [[ "$TEMP_DIR" =~ ^/tmp/ ]]; then
@@ -61,9 +65,14 @@ if [ $? -ne 0 ]; then
 fi
 
 init_compiler $compiled_file
+if [ $? -ne 0 ]; then
+    echo "Ошибка: Не удалось подключить компилятор." >&2
+    exit 1
+fi
+
+
 cp $compiled_file $TEMP_DIR/$compiled_file
 cd $TEMP_DIR/
-
 
 
 check_compiler
