@@ -14,10 +14,10 @@ get_output_file_name(){
 }
 
 init_compiler(){
-    local file=$2
+    local file="$1"
     local file_extension="${file##*.}"
 
-    if [[ "$file" == *.* ]]; then
+    if [[ "$file" == "$file_extension" ]]; then
         echo "Файл $file не имеет расширения" >&2
         exit 1
     fi
@@ -42,6 +42,15 @@ compiled_file=$1
 original_dir=$(pwd)
 output_file_name=$(get_output_file_name $1)
 
+cleanup_temp_dir(){
+    if [[ "$TEMP_DIR" =~ ^/tmp/ ]]; then
+        rm -rf "$TEMP_DIR"
+        echo "TEMP_DIR удален"
+    else
+        echo "Ошибка: TEMP_DIR не является временной папкой!" >&2
+    fi
+}
+
 trap cleanup_temp_dir EXIT
 trap "exit 1" INT TERM HUP
 
@@ -51,13 +60,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-cleanup_temp_dir(){
-    rm -rf "$TEMP_DIR"
-}
-
-
-
-init_compiler --for $compiled_file
+init_compiler $compiled_file
 cp $compiled_file $TEMP_DIR/$compiled_file
 cd $TEMP_DIR/
 
